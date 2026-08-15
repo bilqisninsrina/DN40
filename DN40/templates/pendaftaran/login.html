@@ -1,33 +1,57 @@
 {% extends 'pendaftaran/base.html' %}
 
 {% block content %}
-  <div class="login-home-background" aria-hidden="true" inert>
-    {% include 'pendaftaran/includes/home_content.html' %}
-  </div>
+  <main class="login-page">
+    <div class="login-background" aria-hidden="true" inert>
+      {% include 'pendaftaran/includes/home_content.html' %}
+    </div>
 
-  <div class="login-overlay">
-    <section class="login-card" role="dialog" aria-labelledby="login-title" aria-modal="true">
-      <h1 id="login-title">Register or Login</h1>
+    <section
+      class="login-card"
+      role="dialog"
+      aria-labelledby="login-title"
+      aria-modal="true"
+    >
+      <h1 class="login-title" id="login-title">Register or Login</h1>
 
-      <form method="post">
+      <form class="login-form" method="post">
         {% csrf_token %}
-        <label>
-          Email
-          <input type="email" name="email" required autocomplete="email">
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" required minlength="8" autocomplete="current-password">
-        </label>
-        <button type="submit">Continue with Email</button>
-      </form>
 
-      <div class="divider"><span>Atau</span></div>
-      <a class="sso" href="{% url 'sso_start' %}">Continue with SSO</a>
-      <p class="hint">
-        Mahasiswa aktif masuk melalui SSO UI. Alumni dapat memakai email dan
-        password; akun baru dibuat otomatis.
-      </p>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input
+            class="form-input"
+            id="email"
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input
+            class="form-input"
+            id="password"
+            type="password"
+            name="password"
+            required
+            minlength="8"
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button class="email-button" type="submit">Continue with Email</button>
+
+        <div class="divider" aria-hidden="true">
+          <span class="divider-line"></span>
+          <span class="divider-text">Atau</span>
+          <span class="divider-line"></span>
+        </div>
+
+        <a class="sso-button" href="{% url 'sso_start' %}">Continue with SSO</a>
+      </form>
     </section>
-  </div>
+  </main>
 {% endblock %}

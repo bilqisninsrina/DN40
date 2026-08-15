@@ -6,14 +6,16 @@ class RegistrationFlowTests(TestCase):
     def test_home_is_public(self):
         response = self.client.get(reverse('home'))
         self.assertContains(response, 'DIES')
-        self.assertContains(response, 'nav-main')
+        self.assertContains(response, 'navbar')
         self.assertContains(response, 'package-list')
 
     def test_login_uses_home_page_as_blurred_background(self):
         response = self.client.get(reverse('login'))
-        self.assertContains(response, 'login-home-background')
+        self.assertContains(response, 'login-background')
         self.assertContains(response, 'Kategori Paket')
         self.assertContains(response, 'Register or Login')
+        self.assertContains(response, 'email-button')
+        self.assertContains(response, 'sso-button')
 
     def test_alumni_can_register_with_email(self):
         response = self.client.post(
