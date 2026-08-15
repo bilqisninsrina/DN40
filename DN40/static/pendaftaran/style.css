@@ -48,7 +48,8 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 15px;
+  font-size: 20px;
+  font-weight: 500;
 }
 nav a, summary { color: #000; text-decoration: none; cursor: pointer; }
 details { position: relative; padding: 10px 13px; border-radius: 5px; background: #fff5a7; }
@@ -89,7 +90,8 @@ details > a {
 .hero h1 {
   align-self: center;
   margin: 0;
-  font-size: clamp(40px, 4.1vw, 62px);
+  font-size: 64px;
+  font-weight: 700;
   line-height: 1.38;
   letter-spacing: 1px;
 }
@@ -101,18 +103,19 @@ details > a {
 }
 .intro > p {
   margin: 0 0 clamp(22px, 3vh, 34px);
-  font-size: clamp(12px, 1vw, 15px);
+  font-size: 18px;
+  font-weight: 500;
   line-height: 1.55;
 }
 .events {
-  min-height: 190px;
+  min-height: clamp(190px, 23vh, 260px);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(10px, 1.2vw, 18px);
 }
 .event {
   position: relative;
-  min-height: 190px;
+  min-height: clamp(190px, 23vh, 260px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,7 +123,8 @@ details > a {
   color: #fff;
   background-position: center;
   background-size: cover;
-  font-size: clamp(20px, 2vw, 30px);
+  font-size: 36px;
+  font-weight: 600;
   text-align: center;
 }
 .event::before { content: ""; position: absolute; inset: 0; background: linear-gradient(45deg, #000b, #0002); }
@@ -147,16 +151,17 @@ details > a {
   background: #fff;
   box-shadow: 2px 3px 8px #0002;
 }
-.card h2 { margin: 0 0 24px; font-size: 15px; font-weight: 500; text-align: center; }
+.card h2 { margin: 0 0 24px; font-size: 20px; font-weight: 500; text-align: center; }
 .details { display: flex; flex-direction: column; }
 .details dl {
   display: grid;
   grid-template-columns: 88px minmax(0, 1fr);
   margin: 0;
-  font-size: 13px;
+  font-size: 18px;
+  font-weight: 500;
 }
 .details dt, .details dd { margin: 2px 0; }
-.details small { margin-top: auto; color: #f22; font-size: 9px; }
+.details small { margin-top: auto; color: #ff2424; font-size: 14px; font-weight: 500; }
 .packages { padding: 20px 25px 15px; }
 .package-grid { height: calc(100% - 38px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .package { min-width: 0; display: grid; grid-template-rows: 1fr 25px; gap: 9px; }
@@ -167,12 +172,14 @@ details > a {
   padding: 13px 14px 9px;
   border-radius: 8px;
   background: #fff08b;
-  font-size: 8px;
+  font-size: 10px;
+  font-weight: 500;
   text-align: center;
 }
-.package b { font-size: 10px; }
+.package b { font-size: 14px; font-weight: 500; }
 .package p { margin: 10px 0 6px; text-align: left; }
-.package small { font-size: 7px; text-align: left; }
+.package p, .package small { color: rgb(0 0 0 / 50%); font-size: 10px; font-weight: 500; }
+.package small { text-align: left; }
 .package strong { margin-top: auto; }
 .package > a {
   display: flex;
@@ -181,7 +188,8 @@ details > a {
   border-radius: 4px;
   background: #000;
   color: #fff;
-  font-size: 8px;
+  font-size: 11px;
+  font-weight: 500;
   text-decoration: none;
 }
 footer { height: 38px; background: #000; }
@@ -250,6 +258,21 @@ footer { height: 38px; background: #000; }
 .simple > a { color: #111; }
 .empty p { color: #555; }
 .simple h1 { font-size: 32px; }
+
+/* Ukuran 1093px mempertahankan proporsi versi kompak yang sudah sesuai. */
+@media (max-width: 1200px) {
+  nav { font-size: 15px; }
+  .hero h1 { font-size: clamp(40px, 4.1vw, 50px); }
+  .intro > p { font-size: clamp(12px, 1.25vw, 15px); }
+  .event { font-size: clamp(20px, 2.4vw, 30px); }
+  .card h2 { font-size: 15px; }
+  .details dl { font-size: 13px; }
+  .details small { font-size: 9px; }
+  .package > div { font-size: 8px; }
+  .package b { font-size: 10px; }
+  .package p, .package small { font-size: 7px; }
+  .package > a { font-size: 8px; }
+}
 
 @media (max-width: 900px) {
   :root { --header-height: 72px; }
