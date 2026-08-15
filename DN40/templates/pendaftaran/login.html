@@ -1,1 +1,33 @@
-{% extends 'pendaftaran/base.html' %}{% block content %}<div class="blur-stage"><div class="mock"></div></div><section class="login-card"><h2>Register or Login</h2><form method="post">{% csrf_token %}<label>Email<input type="email" name="email" required autocomplete="email"></label><label>Password<input type="password" name="password" required minlength="8" autocomplete="current-password"></label><button>Continue with Email</button></form><div class="divider"><span>Atau</span></div><a class="sso" href="{% url 'sso_start' %}">Continue with SSO</a><p class="hint">Mahasiswa aktif masuk melalui SSO UI. Alumni dapat memakai email dan password; akun baru dibuat otomatis.</p></section>{% endblock %}
+{% extends 'pendaftaran/base.html' %}
+
+{% block content %}
+  <div class="login-home-background" aria-hidden="true" inert>
+    {% include 'pendaftaran/includes/home_content.html' %}
+  </div>
+
+  <div class="login-overlay">
+    <section class="login-card" role="dialog" aria-labelledby="login-title" aria-modal="true">
+      <h1 id="login-title">Register or Login</h1>
+
+      <form method="post">
+        {% csrf_token %}
+        <label>
+          Email
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" required minlength="8" autocomplete="current-password">
+        </label>
+        <button type="submit">Continue with Email</button>
+      </form>
+
+      <div class="divider"><span>Atau</span></div>
+      <a class="sso" href="{% url 'sso_start' %}">Continue with SSO</a>
+      <p class="hint">
+        Mahasiswa aktif masuk melalui SSO UI. Alumni dapat memakai email dan
+        password; akun baru dibuat otomatis.
+      </p>
+    </section>
+  </div>
+{% endblock %}

@@ -7,15 +7,20 @@ Prototipe Django untuk landing page, registrasi/login alumni, pintu masuk SSO UI
 Persyaratan: Python 3.12+.
 
 ```bash
-cd DN40
+# Jalankan dari folder root repository (folder yang berisi requirements.txt)
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 python -m pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+python DN40/manage.py migrate
+python DN40/manage.py runserver
 ```
 
-Buka <http://127.0.0.1:8000>. Jalankan pengujian dengan `python manage.py test`.
+Buka <http://127.0.0.1:8000>. Hentikan server dengan `Ctrl+C`. Jalankan pengujian
+dari root repository dengan `python DN40/manage.py test`.
+
+Alternatifnya, setelah dependency terpasang, masuk ke folder project dengan
+`cd DN40`, lalu gunakan perintah Django yang lebih pendek: `python manage.py
+migrate` dan `python manage.py runserver`.
 
 ## Alur login
 
