@@ -1,0 +1,56 @@
+{% load static %}
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dies Natalis 40 Fasilkom UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="{% static 'pendaftaran/style.css' %}">
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <a class="logo" href="{% url 'home' %}" aria-label="Dies Natalis 40 Fasilkom UI">
+          <b>40</b>
+          <span>
+            DIES NATALIS<br>
+            <strong>FASILKOM UI</strong>
+            <small>Empat Dekade Keunggulan Berdampak</small>
+          </span>
+        </a>
+
+        <nav class="navbar" aria-label="Navigasi utama">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+          <a class="nav-link" href="{% url 'history' %}">History</a>
+        </nav>
+
+        <div class="auth">
+          {% if user.is_authenticated %}
+            <details>
+              <summary>{{ user.email|default:user.username }}</summary>
+              <a href="{% url 'logout' %}">Keluar</a>
+            </details>
+          {% else %}
+            <a class="login-link" href="{% url 'login' %}">Register/Login</a>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </body>
+</html>
