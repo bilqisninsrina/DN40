@@ -1,0 +1,57 @@
+{% extends 'pendaftaran/base.html' %}
+
+{% block content %}
+  <main class="login-page">
+    <div class="login-background" aria-hidden="true" inert>
+      {% include 'pendaftaran/includes/home_content.html' %}
+    </div>
+
+    <section
+      class="login-card"
+      role="dialog"
+      aria-labelledby="login-title"
+      aria-modal="true"
+    >
+      <h1 class="login-title" id="login-title">Register or Login</h1>
+
+      <form class="login-form" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input
+            class="form-input"
+            id="email"
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input
+            class="form-input"
+            id="password"
+            type="password"
+            name="password"
+            required
+            minlength="8"
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button class="email-button" type="submit">Continue with Email</button>
+
+        <div class="divider" aria-hidden="true">
+          <span class="divider-line"></span>
+          <span class="divider-text">Atau</span>
+          <span class="divider-line"></span>
+        </div>
+
+        <a class="sso-button" href="{% url 'sso_start' %}">Continue with SSO</a>
+      </form>
+    </section>
+  </main>
+{% endblock %}
