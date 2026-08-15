@@ -46,6 +46,16 @@ migrate` dan `python manage.py runserver`.
 
 Halaman checkout masih berupa batas integrasi. Setelah memperoleh dokumentasi dan sandbox resmi UI: buat transaksi di backend, simpan external transaction ID dan status, arahkan pengguna ke hosted payment page, verifikasi signature callback/webhook, dan selalu query status server-to-server sebelum menandai pembayaran lunas. Jangan menerima nominal atau status dari browser sebagai sumber kebenaran. Gunakan idempotency key dan audit log.
 
+## Data pendaftaran untuk tim pemasaran
+
+Semua kategori paket disimpan dalam satu tabel dengan kolom kategori, program
+studi, angkatan, jumlah tiket, ukuran baju, dan total harga. Buat akun staf melalui
+`python DN40/manage.py createsuperuser`, login, lalu buka halaman **History**.
+Tombol **Download Excel Tim Pemasaran** menghasilkan satu file `.xlsx` dengan
+header beku dan filter pada seluruh kolom, sehingga dapat langsung difilter di
+Microsoft Excel tanpa bantuan tim teknis. Data juga dapat dicari dan difilter dari
+halaman `/admin/pendaftaran/registration/`.
+
 ## Catatan aset
 
 Font Poppins dimuat dari Google Fonts dan foto acara memakai URL Unsplash sementara. Ganti dengan aset resmi panitia di `static/` sebelum deploy agar tampilan identik dan tidak bergantung pada layanan eksternal.

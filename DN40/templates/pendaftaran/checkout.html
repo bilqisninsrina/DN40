@@ -1,15 +1,71 @@
 {% extends 'pendaftaran/base.html' %}
 
 {% block content %}
-  <section class="simple">
-    <h1>{{ paket }}</h1>
-    <div class="card empty">
-      <b>Form pembayaran segera hadir.</b>
-      <p>
-        Endpoint ini sudah dilindungi login dan siap dihubungkan ke payment
-        gateway Universitas Indonesia.
-      </p>
-    </div>
-    <a href="{% url 'home' %}">← Pilih paket lain</a>
-  </section>
+  <main class="checkout-page">
+    <section class="checkout-card">
+      <h1>{{ package_name }}</h1>
+
+      <form method="post" id="registration-form" data-unit-price="{{ unit_price }}">
+        {% csrf_token %}
+
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+        {% if form.non_field_errors %}
+          <div class="form-errors">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        {% include 'pendaftaran/includes/form_field.html' with field=form.full_name %}
+        {% include 'pendaftaran/includes/form_field.html' with field=form.whatsapp_number %}
+        {% include 'pendaftaran/includes/form_field.html' with field=form.cohort_year %}
+        {% include 'pendaftaran/includes/form_field.html' with field=form.study_program %}
+        {% include 'pendaftaran/includes/form_field.html' with field=form.ticket_quantity %}
+
+        {% if package != 'non-paket' %}
+          <div class="size-chart" aria-label="Panduan ukuran baju">
+            <table>
+              <thead>
+                <tr><th>Ukuran</th><th>Dada</th><th>Panjang</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>XS</td><td>78–82</td><td>55–59</td></tr>
+                <tr><td>S</td><td>82–86</td><td>59–63</td></tr>
+                <tr><td>M</td><td>86–90</td><td>63–67</td></tr>
+                <tr><td>L</td><td>90–94</td><td>67–71</td></tr>
+                <tr><td>XL</td><td>94–98</td><td>71–75</td></tr>
+                <tr><td>XXL+</td><td>102–116</td><td>79–87</td></tr>
+              </tbody>
+            </table>
+          </div>
+          {% include 'pendaftaran/includes/form_field.html' with field=form.shirt_size %}
+        {% endif %}
+
+        <div class="checkout-total">
+          <span>Total Harga</span>
+          <strong id="total-price">{{ formatted_unit_price }}</strong>
+        </div>
+        <button class="payment-button" type="submit">Continue to Payment</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer" aria-hidden="true"></footer>
+
+  {% if package == 'non-paket' %}
+    <script>
+      (() => {
+        const form = document.querySelector('#registration-form');
+        const quantity = document.querySelector('#id_ticket_quantity');
+        const total = document.querySelector('#total-price');
+        const unitPrice = Number(form.dataset.unitPrice);
+        const formatter = new Intl.NumberFormat('id-ID');
+
+        const updateTotal = () => {
+          const amount = Math.max(1, Number(quantity.value) || 1);
+          total.textContent = `Rp${formatter.format(unitPrice * amount)}`;
+        };
+
+        quantity.addEventListener('input', updateTotal);
+        updateTotal();
+      })();
+    </script>
+  {% endif %}
 {% endblock %}

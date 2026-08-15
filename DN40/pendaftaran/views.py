@@ -5,8 +5,13 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
+
+from .exports import xlsx_response
+from .forms import RegistrationForm
+from .models import Registration
 
 def home(request):
     return render(request, 'pendaftaran/home.html')
@@ -38,13 +43,62 @@ def logout_view(request):
 
 @login_required
 def history(request):
-    return render(request, 'pendaftaran/history.html')
+    registrations = request.user.registrations.all()
+    return render(request, 'pendaftaran/history.html', {'registrations': registrations})
 
 
 @login_required
 def buy(request, kategori):
-    labels = {'alumni': 'Paket Alumni', 'mahasiswa': 'Paket Mahasiswa Aktif', 'non-paket': 'Non-Paket'}
-    return render(request, 'pendaftaran/checkout.html', {'paket': labels.get(kategori, kategori.title())})
+    valid_packages = {value for value, _label in Registration.Package.choices}
+    if kategori not in valid_packages:
+        return redirect('home')
+
+    unit_price = Registration.UNIT_PRICES[kategori]
+    form = RegistrationForm(request.POST or None, package=kategori)
+    if request.method == 'POST' and form.is_valid():
+        registration = form.save(commit=False)
+        registration.user = request.user
+        registration.package = kategori
+        registration.unit_price = unit_price
+        registration.total_price = unit_price * registration.ticket_quantity
+        registration.save()
+        messages.success(request, 'Data pendaftaran tersimpan dan siap dilanjutkan ke pembayaran.')
+        return redirect('history')
+
+    context = {
+        'form': form,
+        'package': kategori,
+        'package_name': Registration.Package(kategori).label,
+        'unit_price': unit_price,
+        'formatted_unit_price': f'Rp{unit_price:,}'.replace(',', '.'),
+    }
+    return render(request, 'pendaftaran/checkout.html', context)
+
+
+@staff_member_required
+def export_registrations(request):
+    columns = [
+        'ID', 'Tanggal', 'Kategori Paket', 'Nama Lengkap', 'Email', 'Nomor WhatsApp',
+        'Tahun Angkatan', 'Program Studi', 'Jumlah Tiket', 'Ukuran Baju',
+        'Harga Satuan', 'Total Harga',
+    ]
+    rows = [columns]
+    for item in Registration.objects.select_related('user').all():
+        rows.append([
+            item.pk,
+            item.created_at.astimezone().strftime('%Y-%m-%d %H:%M'),
+            item.get_package_display(),
+            item.full_name,
+            item.user.email,
+            item.whatsapp_number,
+            item.cohort_year,
+            item.get_study_program_display(),
+            item.ticket_quantity,
+            item.get_shirt_size_display() or '-',
+            item.unit_price,
+            item.total_price,
+        ])
+    return xlsx_response(rows)
 
 
 def sso_start(request):
