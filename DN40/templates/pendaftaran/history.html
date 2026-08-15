@@ -1,0 +1,36 @@
+{% extends 'pendaftaran/base.html' %}
+
+{% block content %}
+  <main class="history-page">
+    <div class="history-heading">
+      <h1>History Pembelian</h1>
+      {% if user.is_staff %}
+        <a href="{% url 'export_registrations' %}">Download Excel Tim Pemasaran</a>
+      {% endif %}
+    </div>
+
+    {% if registrations %}
+      <div class="history-table-wrap">
+        <table class="history-table">
+          <thead>
+            <tr><th>Paket</th><th>Nama</th><th>Tiket</th><th>Total</th><th>Tanggal</th></tr>
+          </thead>
+          <tbody>
+            {% for item in registrations %}
+              <tr>
+                <td>{{ item.get_package_display }}</td>
+                <td>{{ item.full_name }}</td>
+                <td>{{ item.ticket_quantity }}</td>
+                <td>Rp{{ item.total_price }}</td>
+                <td>{{ item.created_at|date:'d M Y H:i' }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="card empty">Belum ada transaksi.</div>
+    {% endif %}
+  </main>
+  <footer class="footer" aria-hidden="true"></footer>
+{% endblock %}
