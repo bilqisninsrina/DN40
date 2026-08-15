@@ -14,33 +14,33 @@
     <link rel="stylesheet" href="{% static 'pendaftaran/style.css' %}">
   </head>
   <body>
-    <header>
-      <a class="brand" href="{% url 'home' %}" aria-label="Dies Natalis 40 Fasilkom UI">
-        <b>40</b>
-        <span>
-          DIES NATALIS<br>
-          <strong>FASILKOM UI</strong>
-          <small>Empat Dekade Keunggulan Berdampak</small>
-        </span>
-      </a>
+    <header class="header">
+      <div class="header-container">
+        <a class="logo" href="{% url 'home' %}" aria-label="Dies Natalis 40 Fasilkom UI">
+          <b>40</b>
+          <span>
+            DIES NATALIS<br>
+            <strong>FASILKOM UI</strong>
+            <small>Empat Dekade Keunggulan Berdampak</small>
+          </span>
+        </a>
 
-      <nav aria-label="Navigasi utama">
-        <div class="nav-main">
-          <a href="{% url 'home' %}">Home</a>
-          <a href="{% url 'history' %}">History</a>
-        </div>
+        <nav class="navbar" aria-label="Navigasi utama">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+          <a class="nav-link" href="{% url 'history' %}">History</a>
+        </nav>
 
-        <div class="nav-account">
+        <div class="auth">
           {% if user.is_authenticated %}
             <details>
               <summary>{{ user.email|default:user.username }}</summary>
               <a href="{% url 'logout' %}">Keluar</a>
             </details>
           {% else %}
-            <a href="{% url 'login' %}">Register/Login</a>
+            <a class="login-link" href="{% url 'login' %}">Register/Login</a>
           {% endif %}
         </div>
-      </nav>
+      </div>
     </header>
 
     {% if messages %}

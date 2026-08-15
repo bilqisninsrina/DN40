@@ -7,7 +7,7 @@ class RegistrationFlowTests(TestCase):
         response = self.client.get(reverse('home'))
         self.assertContains(response, 'DIES')
         self.assertContains(response, 'nav-main')
-        self.assertContains(response, 'package-grid')
+        self.assertContains(response, 'package-list')
 
     def test_login_uses_home_page_as_blurred_background(self):
         response = self.client.get(reverse('login'))

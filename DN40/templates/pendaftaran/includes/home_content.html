@@ -1,66 +1,100 @@
 <main class="home-page">
-  <section class="hero">
-    <h1>DIES<br>NATALIS<br>FASILKOM<br>UI KE-40</h1>
+  <section class="dies-section">
+    <div class="dies-title">
+      <h1>DIES<br>NATALIS<br>FASILKOM<br>UI KE-40</h1>
+    </div>
 
-    <div class="intro">
-      <p>
+    <div class="dies-content">
+      <p class="dies-description">
         Dalam rangka memperingati Dies Natalis ke-40 Fasilkom UI, kami
         menyelenggarakan acara yang dapat diikuti, baik oleh mahasiswa Fasilkom UI
         maupun alumni Fasilkom UI. Rangkaian acara ini terdiri atas:
       </p>
 
-      <div class="events">
-        <div class="event walk"><b>Fun Walk</b></div>
-        <div class="event games"><b>Carnival<br>Games</b></div>
-        <div class="event health"><b>Check<br>Kesehatan</b></div>
-        <div class="event star"><b>Guest Star</b></div>
+      <div class="event-list">
+        <div class="event-card walk">
+          <div class="event-name">Fun Walk</div>
+        </div>
+        <div class="event-card games">
+          <div class="event-name">Carnival<br>Games</div>
+        </div>
+        <div class="event-card health">
+          <div class="event-name">Check<br>Kesehatan</div>
+        </div>
+        <div class="event-card star">
+          <div class="event-name">Guest Star</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="lower">
-    <article class="card details">
-      <h2>Detail Acara</h2>
-      <dl>
-        <dt>Tanggal</dt><dd>: &nbsp; Minggu, 24 Agustus 2026</dd>
-        <dt>Waktu</dt><dd>: &nbsp; 06.30 &nbsp; – &nbsp; Selesai</dd>
-        <dt>Lokasi</dt><dd>: &nbsp; Kampus Fasilkom UI<br>&nbsp;&nbsp;&nbsp; Depok (Gedung Baru)</dd>
-      </dl>
-      <small>*Notes : Registrasi ulang dibuka pukul 06.00 WIB</small>
+  <section class="package-section">
+    <article class="detail-card">
+      <h2 class="detail-title">Detail Acara</h2>
+      <div class="detail-content">
+        <div class="detail-item">
+          <span class="detail-label">Tanggal</span>
+          <span class="detail-separator">:</span>
+          <span class="detail-value">Minggu, 24 Agustus 2026</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Waktu</span>
+          <span class="detail-separator">:</span>
+          <span class="detail-value">06.30 &nbsp; – &nbsp; Selesai</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Lokasi</span>
+          <span class="detail-separator">:</span>
+          <span class="detail-value">Kampus Fasilkom UI<br>Depok (Gedung Baru)</span>
+        </div>
+      </div>
+      <p class="detail-note">*Notes : Registrasi ulang dibuka pukul 06.00 WIB</p>
     </article>
 
-    <article class="card packages">
-      <h2>Kategori Paket</h2>
-      <div class="package-grid">
-        <div class="package">
-          <div>
-            <b>Paket Alumni</b>
-            <p>Hanya dapat dibeli oleh Alumni Fasilkom UI hingga angkatan 2022.</p>
-            <small>Paket sudah termasuk Race Pack dan Kaos.</small>
-            <strong>Rp275.000</strong>
+    <article class="package-card">
+      <h2 class="package-title">Kategori Paket</h2>
+      <div class="package-list">
+        <div class="package-item">
+          <div class="package-info">
+            <h3 class="package-name">Paket Alumni</h3>
+            <p class="package-description">
+              Hanya dapat dibeli oleh Alumni Fasilkom UI hingga angkatan 2022.
+            </p>
+            <p class="package-description">Paket sudah termasuk Race Pack dan Kaos.</p>
+            <strong class="package-price">Rp275.000</strong>
           </div>
-          <a href="{% url 'buy' 'alumni' %}">Beli Paket Alumni</a>
+          <a class="package-button" href="{% url 'buy' 'alumni' %}">Beli Paket Alumni</a>
         </div>
-        <div class="package">
-          <div>
-            <b>Paket Mahasiswa aktif</b>
-            <p>Hanya dapat dibeli oleh Mahasiswa aktif Fasilkom UI mulai dari angkatan 2023 hingga 2026.</p>
-            <small>Paket sudah termasuk Race Pack dan Kaos.</small>
-            <strong>Rp175.000</strong>
+
+        <div class="package-item">
+          <div class="package-info">
+            <h3 class="package-name">Paket Mahasiswa aktif</h3>
+            <p class="package-description">
+              Hanya dapat dibeli oleh Mahasiswa aktif Fasilkom UI mulai dari
+              angkatan 2023 hingga 2026.
+            </p>
+            <p class="package-description">Paket sudah termasuk Race Pack dan Kaos.</p>
+            <strong class="package-price">Rp175.000</strong>
           </div>
-          <a href="{% url 'buy' 'mahasiswa' %}">Beli Paket Mahasiswa Aktif</a>
+          <a class="package-button" href="{% url 'buy' 'mahasiswa' %}">
+            Beli Paket Mahasiswa Aktif
+          </a>
         </div>
-        <div class="package">
-          <div>
-            <b>Non-Paket (hanya tiket)</b>
-            <p>Dapat dibeli oleh seluruh civitas Fasilkom UI, mulai dari alumni hingga mahasiswa aktif.</p>
-            <small>Tidak termasuk race pack dan kaos.</small>
-            <strong>Rp50.000</strong>
+
+        <div class="package-item">
+          <div class="package-info">
+            <h3 class="package-name">Non-Paket (hanya tiket)</h3>
+            <p class="package-description">
+              Dapat dibeli oleh seluruh civitas Fasilkom UI, mulai dari alumni
+              hingga mahasiswa aktif.
+            </p>
+            <p class="package-description">Tidak termasuk race pack dan kaos.</p>
+            <strong class="package-price">Rp50.000</strong>
           </div>
-          <a href="{% url 'buy' 'non-paket' %}">Beli Non-Paket</a>
+          <a class="package-button" href="{% url 'buy' 'non-paket' %}">Beli Non-Paket</a>
         </div>
       </div>
     </article>
   </section>
 </main>
-<footer aria-hidden="true"></footer>
+<footer class="footer" aria-hidden="true"></footer>
