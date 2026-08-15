@@ -1,1 +1,15 @@
-{% extends 'pendaftaran/base.html' %}{% block content %}<section class="simple"><h1>{{ paket }}</h1><div class="card empty"><b>Form pembayaran segera hadir.</b><p>Endpoint ini sudah dilindungi login dan siap dihubungkan ke payment gateway Universitas Indonesia.</p></div><a href="{% url 'home' %}">← Pilih paket lain</a></section>{% endblock %}
+{% extends 'pendaftaran/base.html' %}
+
+{% block content %}
+  <section class="simple">
+    <h1>{{ paket }}</h1>
+    <div class="card empty">
+      <b>Form pembayaran segera hadir.</b>
+      <p>
+        Endpoint ini sudah dilindungi login dan siap dihubungkan ke payment
+        gateway Universitas Indonesia.
+      </p>
+    </div>
+    <a href="{% url 'home' %}">← Pilih paket lain</a>
+  </section>
+{% endblock %}
